@@ -189,7 +189,22 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2.5rem 4rem;
+  }
+
+  .table-scroll {
     overflow-x: auto;
+    width: 100%;
+  }
+
+  .table-scroll-top {
+    overflow-x: auto;
+    width: 100%;
+    height: 16px;
+    margin-bottom: 2px;
+  }
+
+  .table-scroll-top-inner {
+    height: 1px;
   }
 
   .raci-table {
@@ -323,27 +338,14 @@
 <div class="raci-legend">
   <span class="legend-label">Key</span>
   <span class="raci-pill pill-r">R · Responsible</span>
-  <span class="legend-desc">Does the work</span>
   <span class="raci-pill pill-a">A · Accountable</span>
-  <span class="legend-desc">Owns the outcome</span>
   <span class="raci-pill pill-c">C · Consulted</span>
-  <span class="legend-desc">Input required before action</span>
   <span class="raci-pill pill-i">I · Informed</span>
-  <span class="legend-desc">Kept in the loop</span>
-</div>
-
-<div style="max-width: 1200px; margin: 0 auto; padding: 1.5rem 2.5rem 0;">
-  <div style="display: grid; grid-template-columns: 3px 1fr; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 1.5rem;">
-    <div style="background: var(--pink);"></div>
-    <div style="padding: 1.25rem 1.5rem; background: var(--surface);">
-      <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink); margin-bottom: 8px;">A note on this document</div>
-      <p style="font-size: 13px; color: #555; line-height: 1.65; margin: 0 0 6px; max-width: 680px;">This RACI was designed as a proposed framework, not a definitive one. Role structures, ownership, and team composition at the Center for Daring Leadership may differ from what is represented here. The activities and accountability assignments are informed by prior enterprise delivery experience, reasonable assumptions about how a the Center for Daring Leadership engagement operates, and insight from conversation with BetterUp.</p>
-      <p style="font-size: 13px; color: #555; line-height: 1.65; margin: 0; max-width: 680px;">It is offered as a starting point for conversation, not a finished artifact.</p>
-    </div>
-  </div>
 </div>
 
 <div class="table-wrap">
+  <div class="table-scroll-top" id="scroll-top"><div class="table-scroll-top-inner" id="scroll-top-inner"></div></div>
+  <div class="table-scroll" id="scroll-bottom">
   <table class="raci-table">
     <thead>
       <tr>
@@ -929,8 +931,18 @@
 
     </tbody>
   </table>
+  </div>
 </div>
 
+<div style="max-width: 1200px; margin: 0 auto; padding: 1.5rem 2.5rem 0;">
+  <div style="display: grid; grid-template-columns: 3px 1fr; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 1.5rem;">
+    <div style="background: var(--pink);"></div>
+    <div style="padding: 1.25rem; background: var(--surface); width: 100%;">
+      <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink); margin-bottom: 8px;">A note on this document</div>
+      <p style="font-size: 13px; color: #555; line-height: 1.65; margin: 0; width: 100%;">This RACI was designed as a proposed framework, not a definitive one. Role structures, ownership, and team composition at the Center for Daring Leadership may differ from what is represented here. The activities and accountability assignments are informed by prior enterprise delivery experience, reasonable assumptions about how the Center for Daring Leadership engagement operates, and insight from conversation with BetterUp. It is offered as a starting point for conversation, not a finished artifact.</p>
+    </div>
+  </div>
+</div>
 
 <div style="max-width: 1200px; margin: 0 auto; padding: 0 2.5rem 1rem;">
   <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; padding-top: 2rem; border-top: 1px solid var(--border);">Role definitions</div>
@@ -985,5 +997,29 @@
   <p>TinPigProductions · Center for Daring Leadership · Roles and Accountability · Built for the work of human transformation</p>
 </footer>
 
+<script>
+(function() {
+  var top = document.getElementById('scroll-top');
+  var bottom = document.getElementById('scroll-bottom');
+  var topInner = document.getElementById('scroll-top-inner');
+  if (!top || !bottom || !topInner) return;
+
+  function setTopWidth() {
+    var table = bottom.querySelector('table');
+    if (table) topInner.style.width = table.offsetWidth + 'px';
+  }
+
+  setTopWidth();
+  window.addEventListener('resize', setTopWidth);
+
+  top.addEventListener('scroll', function() {
+    bottom.scrollLeft = top.scrollLeft;
+  });
+
+  bottom.addEventListener('scroll', function() {
+    top.scrollLeft = bottom.scrollLeft;
+  });
+})();
+</script>
 </body>
 </html>
