@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Center for Daring Leadership · Client Delivery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #111210;
+    --white: #ffffff;
+    --surface: #f7f5f2;
+    --muted: #888880;
+    --border: #e4e1da;
+    --pink: #e8006e;
+    --pink-light: #fdf0f6;
+    --pink-dim: rgba(232,0,110,0.12);
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--ink);
+    padding: 0 2.5rem;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 15px;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-context {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.03em;
+  }
+
+  .nav-context span {
+    color: var(--pink);
+    margin: 0 6px;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    padding: 5rem 2.5rem 5rem;
+    text-align: center;
+    border-bottom: 3px solid var(--pink);
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--pink);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* CARDS */
+  .cards-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2.5rem 5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .entry-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem 1.75rem 1.75rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .entry-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--pink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  .entry-card:hover { border-color: var(--pink); }
+  .entry-card:hover::before { transform: scaleX(1); }
+
+  .card-num {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-num::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 24px;
+    background: var(--pink);
+    opacity: 0.4;
+  }
+
+  .entry-card h2 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+  }
+
+  .entry-card h2 em { font-style: italic; color: var(--pink); }
+
+  .entry-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-cta {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.15s;
+  }
+
+  .entry-card:hover .card-cta { gap: 10px; color: var(--pink); }
+
+  .card-cta-arrow {
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  /* ATTRIBUTION */
+  .attribution {
+    text-align: center;
+    padding: 0 2.5rem 3rem;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    padding: 1.25rem 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  footer p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    text-align: center;
+  }
+
+  @media (max-width: 680px) {
+    .cards-wrap { grid-template-columns: 1fr; padding: 2.5rem 1.25rem; }
+    
+    .hero { padding: 3.5rem 1.25rem; }
+    nav { padding: 0 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://cp-portfolio-alpha.vercel.app" class="nav-logo">TinPigProductions</a>
+  <div class="nav-context">Center for Daring Leadership <span>·</span> Client Delivery Director</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">BetterUp · Center for Daring Leadership</div>
+  <h1>How I think about <em>this work.</em></h1>
+  <div class="hero-sub">Three entry points into how I think about this role, this methodology, and the work of building something that lasts.</div>
+</div>
+
+<div class="cards-wrap">
+
+  <a href="betterup-cdl-timeline.html" class="entry-card">
+    <div class="card-num">01</div>
+    <h2>The <em>process.</em></h2>
+    <p>A dual-track implementation timeline showing what the client experiences and what happens inside BetterUp at every parallel moment. From activation through the work that transforms.</p>
+    <div class="card-cta">See the timeline <span class="card-cta-arrow">→</span></div>
+  </a>
+
+  <a href="betterup-cdl-methodology.html" class="entry-card">
+    <div class="card-num">02</div>
+    <h2>Brené Brown <em>influence.</em></h2>
+    <p>How the four skill sets of Dare to Lead live inside the delivery function. The <em>how</em> and <em>what</em> framework, delivery intelligence tool, and the full Point of View that predates this conversation.</p>
+    <div class="card-cta">See the methodology <span class="card-cta-arrow">→</span></div>
+  </a>
+
+  <a href="https://cp-portfolio-alpha.vercel.app" target="_blank" class="entry-card">
+    <div class="card-num">03</div>
+    <h2>The work, <em>applied.</em></h2>
+    <p>A complete talent enablement ecosystem built from scratch. Six lifecycle stages, eleven competencies, AI as a primary collaborator. Live and demonstrable.</p>
+    <div class="card-cta">Open portfolio <span class="card-cta-arrow">→</span></div>
+  </a>
+
+  <a href="betterup-cdl-raci.html" class="entry-card">
+    <div class="card-num">04</div>
+    <h2>Roles and <em>accountability.</em></h2>
+    <p>Who owns what, and when. Role definitions and a full RACI across every phase of the delivery lifecycle — from signature through what transforms.</p>
+    <div class="card-cta">See the RACI <span class="card-cta-arrow">→</span></div>
+  </a>
+
+</div>
+
+<div class="attribution">
+  Built by Christin for the Center for Daring Leadership · Client Delivery Director conversation with BetterUp
+</div>
+
+<footer>
+  <p>TinPigProductions · Center for Daring Leadership · 2026</p>
+</footer>
+
+</body>
+</html>

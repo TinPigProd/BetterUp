@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Pre-launch to Transformation · Center for Daring Leadership</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #111210;
+    --white: #ffffff;
+    --surface: #f7f5f2;
+    --muted: #888880;
+    --border: #e4e1da;
+    --pink: #e8006e;
+    --pink-light: #fdf0f6;
+    --track-left: #1a3a5c;
+    --track-left-light: #eef3f8;
+    --track-right: #111210;
+    --track-right-light: #f2f2f0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--ink);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .nav-back {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+  }
+
+  .nav-back:hover { color: var(--white); }
+
+  .nav-title {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-title strong { color: var(--white); font-weight: 500; }
+
+  /* HEADER */
+  .page-header {
+    background: var(--ink);
+    padding: 3rem 2.5rem 2.5rem;
+    border-bottom: 3px solid var(--pink);
+  }
+
+  .page-header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .page-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 1rem;
+  }
+
+  .page-header h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header h1 em { font-style: italic; color: var(--pink); }
+
+  .page-header p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+    max-width: 580px;
+  }
+
+  /* TRACK LEGEND */
+  .track-legend {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.25rem 2.5rem;
+    display: flex;
+    gap: 2rem;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot-customer { background: var(--track-left); }
+  .dot-betterup { background: var(--pink); }
+  .dot-gate { background: #f5a623; border-radius: 2px; transform: rotate(45deg); width: 9px; height: 9px; }
+  .dot-skill { background: var(--surface); border: 2px solid var(--border); }
+
+  /* TIMELINE LAYOUT */
+  .timeline-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 2.5rem 5rem;
+  }
+
+  /* PHASE */
+  .phase {
+    margin-bottom: 2rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .phase-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    cursor: default;
+  }
+
+  .phase-label {
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    grid-column: 1 / -1;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .phase-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--pink);
+    color: var(--white);
+  }
+
+  .phase-name {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .phase-name em { font-style: italic; color: var(--pink); }
+
+  .phase-timing {
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  .phase-skill-tag {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--white);
+  }
+
+  /* TRACK HEADERS */
+  .track-headers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .track-head {
+    padding: 8px 1.25rem;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .track-head.customer { color: var(--track-left); border-right: 1px solid var(--border); }
+  .track-head.betterup { color: var(--pink); }
+
+  /* ITEMS */
+  .phase-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .track-items {
+    padding: 1rem 1.25rem;
+  }
+
+  .track-items.customer { border-right: 1px solid var(--border); }
+
+  .timeline-item {
+    margin-bottom: 8px;
+  }
+
+  .item-btn {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 10px 12px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .item-btn:hover { border-color: var(--pink); background: var(--pink-light); }
+  .item-btn.open { border-color: var(--pink); background: var(--pink-light); }
+
+  .item-indicator {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .ind-customer { background: var(--track-left); }
+  .ind-betterup { background: var(--pink); }
+  .ind-gate {
+    background: #f5a623;
+    border-radius: 1px;
+    transform: rotate(45deg);
+    width: 8px; height: 8px;
+  }
+
+  .item-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    flex: 1;
+  }
+
+  .item-chevron {
+    font-size: 10px;
+    color: var(--muted);
+    transition: transform 0.2s;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .item-btn.open .item-chevron { transform: rotate(180deg); color: var(--pink); }
+
+  /* DETAIL PANEL */
+  .item-detail {
+    display: none;
+    padding: 12px 14px 12px 32px;
+    background: var(--pink-light);
+    border: 1px solid var(--pink);
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+    margin-top: -1px;
+    margin-bottom: 8px;
+  }
+
+  .item-detail.open { display: block; }
+
+  .detail-section {
+    margin-bottom: 10px;
+  }
+
+  .detail-section:last-child { margin-bottom: 0; }
+
+  .detail-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 4px;
+  }
+
+  .detail-text {
+    font-size: 12px;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  .detail-owner {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 9px;
+    border-radius: 20px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  /* GATE */
+  .gate-row {
+    background: #fffbf0;
+    border-top: 1px solid #f5a623;
+    border-bottom: 1px solid #f5a623;
+    padding: 10px 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #7a5500;
+  }
+
+  .gate-icon {
+    width: 16px; height: 16px;
+    background: #f5a623;
+    border-radius: 2px;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  /* PROPOSED MEASUREMENT */
+  .measurement-row {
+    padding: 12px 1.25rem;
+    background: var(--pink-light);
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 14px;
+    align-items: start;
+  }
+
+  .measurement-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pink);
+    white-space: nowrap;
+    padding-top: 1px;
+  }
+
+  .measurement-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .measurement-item {
+    font-size: 11px;
+    font-weight: 500;
+    color: #444;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--white);
+    border: 1px solid var(--border);
+  }
+
+  /* SKILL ANCHOR */
+  .skill-anchor {
+    padding: 10px 1.25rem;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .skill-pill {
+    font-size: 10px;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  /* EVERGREEN NOTE */
+  .evergreen {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--ink);
+    border-radius: 4px;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .evergreen-line {
+    width: 3px;
+    background: var(--pink);
+    border-radius: 2px;
+    flex-shrink: 0;
+    align-self: stretch;
+  }
+
+  .evergreen h3 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .evergreen h3 em { font-style: italic; color: var(--pink); }
+
+  .evergreen p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+  }
+
+  footer {
+    background: var(--ink);
+    padding: 1.25rem 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  footer p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    text-align: center;
+  }
+
+  @media (max-width: 700px) {
+    .phase-items, .track-headers, .phase-header { grid-template-columns: 1fr; }
+    .track-items.customer { border-right: none; border-bottom: 1px solid var(--border); }
+    .track-head.customer { border-right: none; border-bottom: 1px solid var(--border); }
+    .timeline-wrap { padding: 1.5rem 1.25rem 4rem; }
+    nav { padding: 0 1.25rem; }
+    .track-legend { padding: 1rem 1.25rem; }
+    .page-header { padding: 2rem 1.25rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="betterup-cdl-landing.html" class="nav-back">← Back</a>
+  <div class="nav-title"><strong>Implementation Timeline</strong> · Center for Daring Leadership</div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Center for Daring Leadership · Client Delivery</div>
+    <h1>From pre-launch to <em>transformation.</em></h1>
+    <p>Two tracks running in parallel: what the enterprise client experiences, and what the Center for Daring Leadership delivery team is building and holding at every simultaneous moment. Click any item to expand.</p>
+  </div>
+</div>
+
+<div class="track-legend">
+  <div class="legend-item"><div class="legend-dot dot-customer"></div>Customer experience</div>
+  <div class="legend-item"><div class="legend-dot dot-betterup"></div>BetterUp build</div>
+  <div class="legend-item"><div class="legend-dot dot-gate"></div>Gate / confirmation required</div>
+  <div class="legend-item"><div class="legend-dot dot-skill"></div>Dare to Lead skill anchor</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#6b3fa0;"></div>Change Partner activity</div>
+</div>
+
+<div class="timeline-wrap">
+
+  <!-- PHASE 0: SIGNATURE -->
+  <div class="phase">
+    <div class="phase-label">
+      <div class="phase-pill">Signature</div>
+      <div class="phase-name">The work <em>begins.</em></div>
+      <div class="phase-timing">Day 0</div>
+    </div>
+    <div class="track-headers">
+      <div class="track-head customer">Customer experience</div>
+      <div class="track-head betterup">BetterUp build</div>
+    </div>
+    <div class="phase-items">
+      <div class="track-items customer">
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-customer"></div>
+            <div class="item-label">Contract signed. Executive sponsor confirmed.</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What this moment is</div>
+              <div class="detail-text">The client has made a commitment. The executive sponsor who signed is the person whose credibility is now attached to this program. Understanding who that person is, what they are trying to accomplish, and what would constitute success in their terms is the first job of delivery.</div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Owner</div>
+              <div class="detail-owner">Client Delivery Director</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-customer"></div>
+            <div class="item-label">Kickoff conversation: what does success look like for you?</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What this conversation does</div>
+              <div class="detail-text">Not an onboarding call. A listening session. The client articulates their organizational context, their leadership challenges, and what they hope participants will do differently when the program ends. This conversation shapes every delivery decision that follows.</div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Owner</div>
+              <div class="detail-owner">Client Delivery Director</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="track-items">
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-betterup"></div>
+            <div class="item-label">Internal handoff: CS to Client Delivery Director</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What transfers</div>
+              <div class="detail-text">Everything Customer Success learned during the sales process: organizational context, stakeholder dynamics, what the client said they needed, what they did not say but implied. The handoff is a conversation, not a document transfer.</div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Owner</div>
+              <div class="detail-owner">CS + Client Delivery Director</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-betterup"></div>
+            <div class="item-label">Delivery team assembled: facilitation, coaching, People Insights</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">Why this happens at signature</div>
+              <div class="detail-text">The people who will deliver the program need context from the beginning, not a briefing two weeks before launch. Early assembly means the facilitation lead can shape the delivery plan, not just receive it.</div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Owner</div>
+              <div class="detail-owner">Client Delivery Director</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="measurement-row">
+      <div class="measurement-label">Proposed measurement</div>
+      <div class="measurement-items"><span class="measurement-item">Organizational readiness baseline (ADKAR)</span><span class="measurement-item">Executive sponsor engagement level documented</span><span class="measurement-item">Stakeholder map coverage confirmed</span><span class="measurement-item">Internal handoff completeness</span></div>
+    </div>
+    <div class="skill-anchor">
+      <div class="skill-pill">Rumbling with vulnerability</div>
+      Creating the conditions for safety before the program begins
+    </div>
+  </div>
+
+  <!-- PHASE 1: PRE-LAUNCH -->
+  <div class="phase">
+    <div class="phase-label">
+      <div class="phase-pill">Pre-launch</div>
+      <div class="phase-name">Building what the program <em>lands on.</em></div>
+      <div class="phase-timing">Weeks 1 to 4</div>
+    </div>
+    <div class="track-headers">
+      <div class="track-head customer">Customer experience</div>
+      <div class="track-head betterup">BetterUp build</div>
+    </div>
+    <div class="phase-items">
+      <div class="track-items customer">
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-customer"></div>
+            <div class="item-label">Stakeholder mapping session with operating lead</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What we are mapping</div>
+              <div class="detail-text">Who in the organization has formal authority over this program and who has informal influence. Who are the champions and who are the skeptics. Where the resistance will come from and what is underneath it. This map shapes every communication and cascade path design.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director + Change Partner</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-customer"></div>
+            <div class="item-label">Change readiness assessment with HR and program lead</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What readiness means here</div>
+              <div class="detail-text">Not whether the client is excited about the program. Whether the organizational environment will hold what participants learn. Are managers prepared to reinforce courageous leadership behaviors? Is there psychological safety present, or are we asking people to rumble with vulnerability in a place that punishes it?</div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Prosci ADKAR connection</div>
+              <div class="detail-text">Awareness, Desire, Knowledge, Ability, Reinforcement. The readiness assessment maps where the organization sits on each dimension before the first session begins.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director + Change Partner</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-customer"></div>
+            <div class="item-label">Executive sponsor communications briefing</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What the sponsor needs to say and when</div>
+              <div class="detail-text">The launch only works if the executive sponsor shows up with credibility before the first cohort session. This briefing equips them: the right language, the right timing, how to signal that this is a leadership investment not an HR program. The Change Partner drafts ghostwritten messages and talking points. The Client Delivery Director ensures they land with the right relational context.</div>
+            </div>
+            <div class="detail-owner">Change Partner + Client Delivery Director</div>
+          </div>
+        </div>
+      </div>
+      <div class="track-items">
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-betterup"></div>
+            <div class="item-label">Change Partner: change strategy architecture</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What gets built here</div>
+              <div class="detail-text">End-to-end change management strategy for the program launch. Cascade path design identifying champions and skeptics at every level. Communications strategy that does not just deliver messages but shapes the story that makes change possible. Manager toolkits and talking points so frontline leaders can act as multipliers of the Dare to Lead transformation.</div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Owner</div>
+              <div class="detail-owner">Change Partner</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-betterup"></div>
+            <div class="item-label">Platform configuration and access provisioning</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">Technical scope</div>
+              <div class="detail-text">BetterUp platform configured for the client's cohort structure, user provisioning aligned to participant list, SSO or access method confirmed with client IT. This is where the implementation team engages directly with the client's technical contacts.</div>
+            </div>
+            <div class="detail-owner">Implementation + IT</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-gate"></div>
+            <div class="item-label">Gate: end-to-end integration confirmation</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What must be confirmed</div>
+              <div class="detail-text">Participant access verified. SSO working. Data flows confirmed between client systems and BetterUp platform. Notification pathways tested. This gate does not clear until a real participant account completes a real end-to-end test, not a technical checklist.</div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Why this is a gate</div>
+              <div class="detail-text">A launch that fails technically in the first week destroys the trust the client came to build. This gate protects the client relationship before it has had a chance to form.</div>
+            </div>
+            <div class="detail-owner">Implementation + Client IT</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-betterup"></div>
+            <div class="item-label">Facilitation team briefed on organizational context</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What facilitators need to know</div>
+              <div class="detail-text">Industry context. Organizational culture signals from the readiness assessment. Who the participants are and what pressures they are under. Where the likely resistance will appear and how to hold it without softening the methodology. Facilitators do not walk into a room cold.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director + Facilitation Lead</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-gate"></div>
+            <div class="item-label">Gate: change readiness sign-off</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What must be true before this clears</div>
+              <div class="detail-text">Executive sponsor is visible and briefed. Manager reinforcement plan exists. Participant communication has gone out with the right framing. If the organizational environment is not ready to hold the work, this gate creates the moment to name that with the client rather than proceeding and failing quietly.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="measurement-row">
+      <div class="measurement-label">Proposed measurement</div>
+      <div class="measurement-items"><span class="measurement-item">Change readiness score vs. baseline</span><span class="measurement-item">End-to-end integration confirmed</span><span class="measurement-item">Manager briefing completion rate</span><span class="measurement-item">Facilitation team context briefing complete</span><span class="measurement-item">Gate: change readiness sign-off</span></div>
+    </div>
+    <div class="skill-anchor">
+      <div class="skill-pill">Rumbling with vulnerability</div>
+      Safety is built before it is needed, not assumed
+    </div>
+  </div>
+
+  <!-- PHASE 2: LAUNCH -->
+  <div class="phase">
+    <div class="phase-label">
+      <div class="phase-pill">Launch</div>
+      <div class="phase-name">Earning trust <em>in real time.</em></div>
+      <div class="phase-timing">Weeks 5 to 8</div>
+    </div>
+    <div class="track-headers">
+      <div class="track-head customer">Customer experience</div>
+      <div class="track-head betterup">BetterUp build</div>
+    </div>
+    <div class="phase-items">
+      <div class="track-items customer">
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-customer"></div>
+            <div class="item-label">Cohort kickoff: executive sponsor visible and credible</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What makes this land</div>
+              <div class="detail-text">The sponsor does not read a prepared statement. They speak to why this work matters to them personally. That requires the Client Delivery Director to have had the right pre-brief conversation, not just sent a talking points document.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director + Executive Sponsor</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-customer"></div>
+            <div class="item-label">Session 1: Rumbling with Vulnerability</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">Why this is first</div>
+              <div class="detail-text">The Dare to Lead curriculum is sequenced deliberately. Vulnerability is the foundation. Everything that follows, trust, values, resilience, depends on participants having engaged honestly with this module. Skipping it or softening it at client request is the most common form of methodology drift. It does not happen.</div>
+            </div>
+            <div class="detail-owner">Facilitation Lead</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-customer"></div>
+            <div class="item-label">Manager cascade activation: reinforcement toolkit delivered</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What managers receive and when</div>
+              <div class="detail-text">Within 48 hours of Session 1, the managers of participants receive language, conversation starters, and context to reinforce what their people are learning. The Change Partner builds the toolkit. The Client Delivery Director ensures it reaches the right people through the right channels. If managers are not activated at launch, the organizational environment works against the program rather than with it.</div>
+            </div>
+            <div class="detail-owner">Change Partner + Client Delivery Director</div>
+          </div>
+        </div>
+      </div>
+      <div class="track-items">
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-betterup"></div>
+            <div class="item-label">Post-Session 1 debrief with facilitation lead</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What gets surfaced here</div>
+              <div class="detail-text">Energy in the room. Where armor was visible. What landed and what did not. Any dynamics in the cohort that need attention. Any signs that the organizational environment is working against the program. This debrief happens within 24 hours of every session, not at the end of the program.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director + Facilitation Lead</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-betterup"></div>
+            <div class="item-label">Participant reflection synthesis: first cohort read</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What the synthesis surfaces</div>
+              <div class="detail-text">Participant reflections are read against the four skill sets. Where is strong signal present? Where is resistance showing up? Is the cohort engaging with vulnerability or performing engagement? This first synthesis creates the baseline the rest of the program is measured against.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-gate"></div>
+            <div class="item-label">Gate: launch green light confirmed</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What this gate confirms</div>
+              <div class="detail-text">Platform working. Participants engaged. Manager cascade active. No critical methodology drift in Session 1. Facilitation quality confirmed. If any of these conditions is not met, the delivery team addresses it before Session 2, not after the program closes.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="measurement-row">
+      <div class="measurement-label">Proposed measurement</div>
+      <div class="measurement-items"><span class="measurement-item">Session 1 attendance and completion rate</span><span class="measurement-item">Participant reflection submission rate</span><span class="measurement-item">Manager cascade activation rate</span><span class="measurement-item">Skill set signal: Session 1 baseline</span><span class="measurement-item">Armor indicators flagged and logged</span><span class="measurement-item">Gate: launch green light confirmed</span></div>
+    </div>
+    <div class="skill-anchor">
+      <div class="skill-pill">Braving trust</div>
+      Trust is built through presence and consistency, not by declaration
+    </div>
+  </div>
+
+  <!-- PHASE 3: SUSTAIN -->
+  <div class="phase">
+    <div class="phase-label">
+      <div class="phase-pill">Sustain</div>
+      <div class="phase-name">Protecting the work <em>under pressure.</em></div>
+      <div class="phase-timing">Weeks 9 to 20</div>
+    </div>
+    <div class="track-headers">
+      <div class="track-head customer">Customer experience</div>
+      <div class="track-head betterup">BetterUp build</div>
+    </div>
+    <div class="phase-items">
+      <div class="track-items customer">
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-customer"></div>
+            <div class="item-label">Mid-program sponsor check-in: honest progress conversation</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What this conversation requires</div>
+              <div class="detail-text">The Client Delivery Director tells the sponsor what the cohort data actually shows, including things that are uncomfortable. Leaders who were brave enough to buy Dare to Lead deserve a delivery partner brave enough to tell them the truth. This is where the mid-program value narrative is delivered and adjusted.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director + Executive Sponsor</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-customer"></div>
+            <div class="item-label">Customization requests evaluated and responded to</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">The methodology protection principle</div>
+              <div class="detail-text">Clients will ask to compress the timeline, skip modules, or soften the language. Each request has a logic to it. The response is never a flat no. It is a conversation about what the client is actually trying to solve, followed by a clear explanation of what adaptation is possible and what is not. Where communications or messaging adaptations are warranted, the Change Partner designs the adjusted approach while the Client Delivery Director holds the methodology line.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director + Change Partner</div>
+          </div>
+        </div>
+      </div>
+      <div class="track-items">
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-betterup"></div>
+            <div class="item-label">Change Partner: listening loops and mid-program messaging</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What the Change Partner owns in sustain</div>
+              <div class="detail-text">Real-time signal from participant reflections, manager feedback, and organizational dynamics feeds into the Change Partner's ongoing communications refinement. Mid-program messaging interventions keep the sponsor visible and participants oriented. Listening loops close within 48 hours of each session so the next communication is shaped by what actually happened, not what was planned.</div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Owner</div>
+              <div class="detail-owner">Change Partner</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-betterup"></div>
+            <div class="item-label">Bi-weekly delivery health checks: internal team</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What gets reviewed</div>
+              <div class="detail-text">Facilitation quality signals. Participant engagement trajectory. Risk register updated. Any methodology drift identified and addressed before it compounds. Open items assigned and tracked. The health check is short and specific. It is not a status meeting.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director + CS + Facilitation Lead</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-betterup"></div>
+            <div class="item-label">Ongoing reflection synthesis: cohort signal tracked session to session</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What changes based on this signal</div>
+              <div class="detail-text">Facilitation approach adjusted where needed. Client communications calibrated to what participants are actually experiencing. Early indicators of disengagement addressed before they become patterns. The signal loop closes within 48 hours of each session.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-gate"></div>
+            <div class="item-label">Gate: methodology integrity confirmed at midpoint</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What is checked</div>
+              <div class="detail-text">All four skill set modules are being delivered as designed. No sessions have been compressed below minimum time requirements. Facilitation is holding the curriculum rather than softening it. Any deviations are documented with the rationale and approved by the delivery lead before they happen, not after.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director + Facilitation Lead</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="measurement-row">
+      <div class="measurement-label">Proposed measurement</div>
+      <div class="measurement-items"><span class="measurement-item">Session-over-session engagement trajectory</span><span class="measurement-item">Skill set signal progression across cohorts</span><span class="measurement-item">Methodology drift incidents logged and resolved</span><span class="measurement-item">Mid-program sponsor confidence rating</span><span class="measurement-item">Qualitative themes: organizational environment conditions</span><span class="measurement-item">Gate: methodology integrity confirmed at midpoint</span></div>
+    </div>
+    <div class="skill-anchor">
+      <div class="skill-pill">Living into values</div>
+      Protecting the work under pressure is itself a values practice
+    </div>
+  </div>
+
+  <!-- PHASE 4: ELEVATE -->
+  <div class="phase">
+    <div class="phase-label">
+      <div class="phase-pill">Elevate</div>
+      <div class="phase-name">The work <em>transforms.</em></div>
+      <div class="phase-timing">Ongoing</div>
+    </div>
+    <div class="track-headers">
+      <div class="track-head customer">Customer experience</div>
+      <div class="track-head betterup">BetterUp build</div>
+    </div>
+    <div class="phase-items">
+      <div class="track-items customer">
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-customer"></div>
+            <div class="item-label">Executive business review: outcome narrative delivered</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What the narrative connects</div>
+              <div class="detail-text">Not a program completion report. A story that connects what participants experienced to what the business is trying to accomplish. The <em>how</em> of how leaders showed up connects to the <em>what</em> of what their teams produced. The sponsor needs to be able to stand up in front of their leadership team and justify the investment. This narrative makes that possible.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director + People Insights</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-customer"></div>
+            <div class="item-label">What comes next conversation: sustaining a courageous culture</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What this conversation opens</div>
+              <div class="detail-text">This conversation with the sponsor names what the work looks like as it deepens: additional cohorts, new leadership levels brought into the program, manager reinforcement structures, integration with performance systems, and sustained coaching. The Dare to Lead methodology does not have a finish line. The engagement evolves as the organization does.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director + CS</div>
+          </div>
+        </div>
+      </div>
+      <div class="track-items">
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-betterup"></div>
+            <div class="item-label">Delivery retrospective: what we carry forward</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What gets documented</div>
+              <div class="detail-text">What worked in the delivery model and what needs to change. What the client taught us about this industry, this culture, this kind of organizational challenge. What the facilitation team learned about holding the Dare to Lead curriculum under real enterprise pressure. This learning goes back into the delivery infrastructure.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director + Full Team</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <button class="item-btn" onclick="toggle(this)">
+            <div class="item-indicator ind-betterup"></div>
+            <div class="item-label">Voice of client themes and playbook build</div>
+            <div class="item-chevron">▼</div>
+          </button>
+          <div class="item-detail">
+            <div class="detail-section">
+              <div class="detail-label">What gets built from what was learned</div>
+              <div class="detail-text">What enterprise clients consistently push back on. Where the methodology is hardest to hold. What organizational patterns emerge across cohorts. The Change Partner documents what great communications and change strategy looked like in this engagement and builds it into reusable frameworks, cascade templates, and executive talking point guides that raise the standard for every engagement that follows.</div>
+            </div>
+            <div class="detail-owner">Client Delivery Director + Change Partner</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="measurement-row">
+      <div class="measurement-label">Proposed measurement</div>
+      <div class="measurement-items"><span class="measurement-item">Kirkpatrick levels 1 to 4</span><span class="measurement-item">Leadership attrition reduction</span><span class="measurement-item">Team effectiveness scores</span><span class="measurement-item">Psychological safety ratings</span><span class="measurement-item">Manager effectiveness shift</span><span class="measurement-item">Leadership behavior shift (360 or manager observation)</span><span class="measurement-item">Participant-reported application of four skill sets</span><span class="measurement-item">Sponsor ROI narrative: connecting <em>how</em> metrics to <em>what</em> results</span><span class="measurement-item">Voice of client themes documented for curriculum and product</span></div>
+    </div>
+    <div class="skill-anchor">
+      <div class="skill-pill">Learning to rise</div>
+      Brave enough to look honestly at what the work produced, and what to build next
+    </div>
+  </div>
+
+  <!-- EVERGREEN NOTE -->
+  <div class="evergreen">
+    <div class="evergreen-line"></div>
+    <div>
+      <h3>The work <em>transforms.</em></h3>
+      <p>The Elevate phase is not a conclusion. It is a transition. Courageous cultures are built over time, not installed in a series of sessions. The engagement evolves as the organization expands the work to new cohorts, new leadership levels, and new organizational challenges. What gets built in the first engagement becomes the foundation for what comes next. The timeline does not end. It compounds.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>TinPigProductions · Center for Daring Leadership · Implementation Timeline · Built for the work of human transformation</p>
+</footer>
+
+<script>
+function toggle(btn) {
+  const detail = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  detail.classList.toggle('open', !isOpen);
+}
+</script>
+
+</body>
+</html>

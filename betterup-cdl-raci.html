@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roles and Accountability · Center for Daring Leadership</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #111210;
+    --white: #ffffff;
+    --surface: #f7f5f2;
+    --muted: #888880;
+    --border: #e4e1da;
+    --pink: #e8006e;
+    --pink-light: #fdf0f6;
+    --r: #e8006e;
+    --r-light: #fdf0f6;
+    --a: #1a3a5c;
+    --a-light: #eef3f8;
+    --c: #3d6651;
+    --c-light: #eaf2ed;
+    --i: #f7f5f2;
+    --i-text: #888880;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    background: var(--ink);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .nav-back {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+  }
+
+  .nav-back:hover { color: var(--white); }
+
+  .nav-title {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .nav-title strong { color: var(--white); font-weight: 500; }
+
+  .page-header {
+    background: var(--ink);
+    padding: 3rem 2.5rem 2.5rem;
+    border-bottom: 3px solid var(--pink);
+  }
+
+  .page-header-inner { max-width: 1200px; margin: 0 auto; }
+
+  .page-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 1rem;
+  }
+
+  .page-header h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header h1 em { font-style: italic; color: var(--pink); }
+
+  .page-header p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+    max-width: 560px;
+  }
+
+  /* RACI LEGEND */
+  .raci-legend {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.25rem 2.5rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+
+  .legend-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+  }
+
+  .raci-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .pill-r { background: var(--r-light); color: var(--r); }
+  .pill-a { background: var(--a-light); color: var(--a); }
+  .pill-c { background: var(--c-light); color: var(--c); }
+  .pill-i { background: var(--i); color: var(--i-text); border: 1px solid var(--border); }
+
+  .legend-desc {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ROLE DEFINITIONS */
+  .roles-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 2.5rem 1rem;
+  }
+
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 2rem;
+  }
+
+  .role-card {
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: var(--white);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .role-card:hover { border-color: var(--pink); background: var(--pink-light); }
+  .role-card.active { border-color: var(--pink); background: var(--pink-light); }
+
+  .role-card .rc-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 5px;
+    line-height: 1.3;
+  }
+
+  .role-card .rc-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* RACI TABLE */
+  .table-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2.5rem 4rem;
+    overflow-x: auto;
+  }
+
+  .raci-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    min-width: 900px;
+  }
+
+  .raci-table th {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--border);
+    background: var(--surface);
+    white-space: nowrap;
+  }
+
+  .raci-table th.role-col {
+    text-align: center;
+    width: 100px;
+  }
+
+  .raci-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+    line-height: 1.45;
+  }
+
+  .raci-table td.activity-col {
+    font-weight: 500;
+    color: var(--ink);
+    font-size: 12px;
+    min-width: 240px;
+  }
+
+  .raci-table td.phase-col {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    width: 90px;
+  }
+
+  .raci-table td.cell {
+    text-align: center;
+    width: 100px;
+  }
+
+  .r-cell { background: var(--r-light); }
+  .a-cell { background: var(--a-light); }
+  .c-cell { background: var(--c-light); }
+  .i-cell { background: var(--i); }
+
+  .cell-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .badge-r { background: var(--r); color: var(--white); }
+  .badge-a { background: var(--a); color: var(--white); }
+  .badge-c { background: var(--c); color: var(--white); }
+  .badge-i { background: var(--border); color: var(--muted); }
+  .badge-empty { background: transparent; color: transparent; }
+
+  .phase-group-header td {
+    background: var(--ink);
+    color: rgba(255,255,255,0.7);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 12px;
+    border-bottom: none;
+  }
+
+  .phase-group-header td .phase-name-header {
+    color: var(--white);
+  }
+
+  footer {
+    background: var(--ink);
+    padding: 1.25rem 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  footer p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1.25rem; }
+    .page-header { padding: 2rem 1.25rem; }
+    .roles-wrap, .table-wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .roles-grid { grid-template-columns: 1fr 1fr; }
+    .raci-legend { padding: 1rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="betterup-cdl-landing.html" class="nav-back">← Back</a>
+  <div class="nav-title"><strong>Roles and Accountability</strong> · Center for Daring Leadership</div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Center for Daring Leadership · Delivery governance</div>
+    <h1>Who owns what, and <em>when.</em></h1>
+    <p>Clarity on roles and accountability is not bureaucracy. It is the infrastructure that lets a cross-functional delivery team move with speed and confidence across a complex, multi-phase engagement.</p>
+  </div>
+</div>
+
+<div class="raci-legend">
+  <span class="legend-label">Key</span>
+  <span class="raci-pill pill-r">R · Responsible</span>
+  <span class="legend-desc">Does the work</span>
+  <span class="raci-pill pill-a">A · Accountable</span>
+  <span class="legend-desc">Owns the outcome</span>
+  <span class="raci-pill pill-c">C · Consulted</span>
+  <span class="legend-desc">Input required before action</span>
+  <span class="raci-pill pill-i">I · Informed</span>
+  <span class="legend-desc">Kept in the loop</span>
+</div>
+
+<div style="max-width: 1200px; margin: 0 auto; padding: 1.5rem 2.5rem 0;">
+  <div style="display: grid; grid-template-columns: 3px 1fr; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 1.5rem;">
+    <div style="background: var(--pink);"></div>
+    <div style="padding: 1.25rem 1.5rem; background: var(--surface);">
+      <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink); margin-bottom: 8px;">A note on this document</div>
+      <p style="font-size: 13px; color: #555; line-height: 1.65; margin: 0 0 6px; max-width: 680px;">This RACI was designed as a proposed framework, not a definitive one. Role structures, ownership, and team composition at the Center for Daring Leadership may differ from what is represented here. The activities and accountability assignments are informed by prior enterprise delivery experience, reasonable assumptions about how a the Center for Daring Leadership engagement operates, and insight from conversation with BetterUp.</p>
+      <p style="font-size: 13px; color: #555; line-height: 1.65; margin: 0; max-width: 680px;">It is offered as a starting point for conversation, not a finished artifact.</p>
+    </div>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table class="raci-table">
+    <thead>
+      <tr>
+        <th>Phase</th>
+        <th>Activity</th>
+        <th class="role-col">Client Delivery Director</th>
+        <th class="role-col">Change Partner</th>
+        <th class="role-col">Facilitation Lead</th>
+        <th class="role-col">Customer Success</th>
+        <th class="role-col">People Insights</th>
+        <th class="role-col">Impl / Tech</th>
+        <th class="role-col" style="color: var(--a);">Exec Sponsor ·</th>
+        <th class="role-col" style="color: var(--a);">Program Lead ·</th>
+        <th class="role-col">Vice President</th>
+        <th class="role-col">Executive Director</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="phase-group-header">
+        <td colspan="12"><span class="phase-name-header">Activate</span> · Day 0</td>
+      </tr>
+      <tr>
+        <td class="phase-col">Activate</td>
+        <td class="activity-col">CS to Client Delivery Director handoff</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Activate</td>
+        <td class="activity-col">Kickoff listening session with executive sponsor</td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+      
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Activate</td>
+        <td class="activity-col">Delivery team assembled</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+
+      <tr>
+        <td class="phase-col">Activate</td>
+        <td class="activity-col">Measurement and reporting approach scoped</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+
+      <tr class="phase-group-header">
+        <td colspan="12"><span class="phase-name-header">Pre-launch</span> · Weeks 1 to 4</td>
+      </tr>
+      <tr>
+        <td class="phase-col">Pre-launch</td>
+        <td class="activity-col">Stakeholder mapping and cascade path design</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+      
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Pre-launch</td>
+        <td class="activity-col">Change readiness assessment (ADKAR)</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+      
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Pre-launch</td>
+        <td class="activity-col">Change strategy architecture</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Pre-launch</td>
+        <td class="activity-col">Delivery plan documented and approved</td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Pre-launch</td>
+        <td class="activity-col">Deployment consultation with client IT and program lead</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Pre-launch</td>
+        <td class="activity-col">Executive sponsor communications briefing and ghostwriting</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+      
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Pre-launch</td>
+        <td class="activity-col">Platform configuration and integration testing</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+      
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Pre-launch</td>
+        <td class="activity-col">Gate: change readiness sign-off</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+      
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Pre-launch</td>
+        <td class="activity-col">Gate: end-to-end integration confirmation</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+      
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+
+      <tr class="phase-group-header">
+        <td colspan="12"><span class="phase-name-header">Launch</span> · Weeks 5 to 8</td>
+      </tr>
+      <tr>
+        <td class="phase-col">Launch</td>
+        <td class="activity-col">Cohort kickoff: executive sponsor activation</td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+      
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Launch</td>
+        <td class="activity-col">Session facilitation: Dare to Lead curriculum delivery</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Launch</td>
+        <td class="activity-col">Manager cascade: reinforcement toolkit delivery</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+      
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Launch</td>
+        <td class="activity-col">Post-session debrief and reflection synthesis</td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Launch</td>
+        <td class="activity-col">Gate: launch green light confirmed</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+
+      <tr class="phase-group-header">
+        <td colspan="12"><span class="phase-name-header">Sustain</span> · Weeks 9 to 20</td>
+      </tr>
+      <tr>
+        <td class="phase-col">Sustain</td>
+        <td class="activity-col">Bi-weekly delivery health checks</td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Sustain</td>
+        <td class="activity-col">Listening loops and mid-program messaging</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Sustain</td>
+        <td class="activity-col">Mid-program sponsor conversation</td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Sustain</td>
+        <td class="activity-col">Methodology protection: customization evaluation</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Sustain</td>
+        <td class="activity-col">Risk monitoring and escalation log maintained</td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Sustain</td>
+        <td class="activity-col">Gate: methodology integrity at midpoint</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+
+      <tr class="phase-group-header">
+        <td colspan="12"><span class="phase-name-header">Elevate</span> · Ongoing</td>
+      </tr>
+      <tr>
+        <td class="phase-col">Elevate</td>
+        <td class="activity-col">Executive business review: outcome narrative</td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Elevate</td>
+        <td class="activity-col">Delivery retrospective and lessons learned</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Elevate</td>
+        <td class="activity-col">Voice of client themes and playbook build</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Elevate</td>
+        <td class="activity-col">External lessons learned with client</td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Elevate</td>
+        <td class="activity-col">Internal lessons learned</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Elevate</td>
+        <td class="activity-col">Sustainability plan executed</td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+      <tr>
+        <td class="phase-col">Elevate</td>
+        <td class="activity-col">What comes next: expanding the work</td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell c-cell"><span class="cell-badge badge-c">C</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell r-cell"><span class="cell-badge badge-r">R</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      
+        <td class="cell a-cell"><span class="cell-badge badge-a">A</span></td>
+        <td class="cell i-cell"><span class="cell-badge badge-i">I</span></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 2.5rem 1rem;">
+  <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; padding-top: 2rem; border-top: 1px solid var(--border);">Role definitions</div>
+</div>
+<div class="roles-wrap">
+  <div class="roles-grid">
+    <div class="role-card">
+      <div class="rc-title">Client Delivery Director</div>
+      <div class="rc-desc">Holds the client relationship. Stewards methodology integrity. Orchestrates internal delivery ecosystem. Owns the executive sponsor connection and the value narrative.</div>
+    </div>
+    <div class="role-card">
+      <div class="rc-title">Change Partner</div>
+      <div class="rc-desc">Architects change strategy and cascade communications. Builds manager toolkits, ghostwritten executive messages, and listening loops. Defines what great communications look like for this engagement.</div>
+    </div>
+    <div class="role-card">
+      <div class="rc-title">Facilitation Lead</div>
+      <div class="rc-desc">Delivers the Dare to Lead curriculum in the room. Holds the methodology under participant pressure. Provides post-session signal to the delivery team. Owns participant experience quality.</div>
+    </div>
+    <div class="role-card">
+      <div class="rc-title">Customer Success</div>
+      <div class="rc-desc">Owns the commercial relationship. Manages renewal and expansion context. Provides sales-to-delivery handoff. Stays informed of delivery health to protect the client relationship.</div>
+    </div>
+    <div class="role-card">
+      <div class="rc-title">People Insights</div>
+      <div class="rc-desc">Designs and executes measurement approach. Synthesizes data into value narrative components. Tracks Kirkpatrick levels 1 through 4. Supports the executive business review with evidence.</div>
+    </div>
+    <div class="role-card">
+      <div class="rc-title">Implementation / Tech</div>
+      <div class="rc-desc">Configures BetterUp platform for the engagement. Manages SSO, provisioning, and API integration. Executes end-to-end testing. Resolves technical issues that surface during delivery.</div>
+    </div>
+    <div class="role-card">
+      <div class="rc-title">Vice President</div>
+      <div class="rc-desc">Builds and grows the practice. Senior presence at strategic enterprise accounts. Onsite with customers for key moments. Consults on methodology and integration decisions. Shapes strategic direction for enterprise growth and human transformation platform.</div>
+    </div>
+    <div class="role-card">
+      <div class="rc-title">Executive Director</div>
+      <div class="rc-desc">Builds and grows the practice. Senior presence at strategic enterprise accounts. Onsite with customers for key moments. Consults on methodology and integration decisions. Shapes strategic direction for enterprise growth and human transformation platform.</div>
+    </div>
+    <div class="role-card" style="border-left: 3px solid var(--a); background: var(--a-light);">
+      <div class="rc-title" style="color: var(--a);">Executive Sponsor · Client</div>
+      <div class="rc-desc">Owns the investment on the client side. Provides organizational context and strategic intent. Shows up visibly at launch and key moments. Champions the program to their leadership team.</div>
+    </div>
+    <div class="role-card" style="border-left: 3px solid var(--a); background: var(--a-light);">
+      <div class="rc-title" style="color: var(--a);">Program Lead · Client</div>
+      <div class="rc-desc">Manages day-to-day logistics on the client side. Coordinates participant scheduling and access. Serves as the operating contact for delivery communications. Escalates issues to the executive sponsor.</div>
+    </div>
+  </div>
+</div>
+
+
+<footer>
+  <p>TinPigProductions · Center for Daring Leadership · Roles and Accountability · Built for the work of human transformation</p>
+</footer>
+
+</body>
+</html>

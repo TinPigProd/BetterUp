@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brené Brown Influence · Center for Daring Leadership</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #111210;
+    --white: #ffffff;
+    --surface: #f7f5f2;
+    --muted: #888880;
+    --border: #e4e1da;
+    --pink: #e8006e;
+    --pink-light: #fdf0f6;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    background: var(--ink);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .nav-back {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+  }
+
+  .nav-back:hover { color: var(--white); }
+
+  .nav-title {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .nav-title strong { color: var(--white); font-weight: 500; }
+
+  .page-header {
+    background: var(--ink);
+    padding: 3rem 2.5rem 2.5rem;
+    border-bottom: 3px solid var(--pink);
+  }
+
+  .page-header-inner { max-width: 860px; margin: 0 auto; }
+
+  .page-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 1rem;
+  }
+
+  .page-header h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header h1 em { font-style: italic; color: var(--pink); }
+
+  .page-header p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+    max-width: 560px;
+  }
+
+  .content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 2.5rem 5rem;
+  }
+
+  /* CONTEXT BLOCK */
+  .context-block {
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .context-inner {
+    display: grid;
+    grid-template-columns: 3px 1fr;
+  }
+
+  .context-stripe { background: var(--pink); }
+
+  .context-body {
+    padding: 1.5rem 1.75rem;
+    background: var(--surface);
+  }
+
+  .context-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 10px;
+  }
+
+  .context-body h2 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+  }
+
+  .context-body h2 em { font-style: italic; color: var(--pink); }
+
+  .context-body p {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+    max-width: 580px;
+    margin-bottom: 0.75rem;
+  }
+
+  .context-body p:last-child { margin-bottom: 0; }
+
+  .pov-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    padding: 7px 16px;
+    border-radius: 2px;
+    margin-top: 1rem;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .pov-link:hover { background: var(--ink); color: var(--white); }
+
+  /* CARDS */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .entry-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.75rem 1.5rem 1.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .entry-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--pink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  .entry-card:hover { border-color: var(--pink); }
+  .entry-card:hover::before { transform: scaleX(1); }
+
+  .card-num {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-num::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 20px;
+    background: var(--pink);
+    opacity: 0.4;
+  }
+
+  .entry-card h3 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.6rem;
+  }
+
+  .entry-card h3 em { font-style: italic; color: var(--pink); }
+
+  .entry-card p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-cta {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: gap 0.15s, color 0.15s;
+  }
+
+  .entry-card:hover .card-cta { gap: 9px; color: var(--pink); }
+
+  footer {
+    background: var(--ink);
+    padding: 1.25rem 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  footer p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1.25rem; }
+    .page-header { padding: 2rem 1.25rem; }
+    .content { padding: 2rem 1.25rem 4rem; }
+    .cards-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="betterup-cdl-landing.html" class="nav-back">← Back</a>
+  <div class="nav-title"><strong>Brené Brown Influence</strong> · Center for Daring Leadership</div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Center for Daring Leadership · Methodology</div>
+    <h1>The four skill sets live in the <em>delivery function,</em> not just the curriculum.</h1>
+    <p>How Brené Brown's research shaped how I think about change, organizational readiness, and what it takes to protect a methodology under enterprise pressure.</p>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="context-block">
+    <div class="context-inner">
+      <div class="context-stripe"></div>
+      <div class="context-body">
+        <div class="context-eyebrow">Context to consider</div>
+        <h2>The <em>how</em> and the <em>what</em> are not separate investments.</h2>
+        <p>The thinking behind this page is grounded in the same foundations that shape the Dare to Lead curriculum. The full thinking is in my portfolio Point of View.</p>
+        <p>That thinking predates this conversation.</p>
+        <a href="https://cp-portfolio-alpha.vercel.app/tinpigprod-pov.html" target="_blank" class="pov-link">Read the Point of View →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards-grid">
+
+    <a href="betterup-cdl-timeline.html" class="entry-card">
+      <div class="card-num">01</div>
+      <h3>Methodology in <em>delivery.</em></h3>
+      <p>How the four skill sets anchor every phase of the implementation timeline. From creating safety before the first session to honest assessment after the last one.</p>
+      <div class="card-cta">See the timeline →</div>
+    </a>
+
+    <a href="betterup-cdl-tool.html" class="entry-card">
+      <div class="card-num">02</div>
+      <h3>Delivery <em>intelligence.</em></h3>
+      <p>A tool that reads participant reflections through the four skill sets of daring leadership. What the cohort is telling you, and what it means for the next client conversation.</p>
+      <div class="card-cta">See the tool →</div>
+    </a>
+
+    <a href="https://cp-portfolio-alpha.vercel.app/tinpigprod-pov.html" target="_blank" class="entry-card">
+      <div class="card-num">03</div>
+      <h3>The full <em>Point of View.</em></h3>
+      <p>The <em>how</em> and <em>what</em> framework. The role of psychological safety in honest feedback. Why the framework and the culture are the same investment. Written before this conversation.</p>
+      <div class="card-cta">Read the Point of View →</div>
+    </a>
+
+  </div>
+
+</div>
+
+<footer>
+  <p>TinPigProductions · Center for Daring Leadership · Brené Brown Influence · Built for the work of human transformation</p>
+</footer>
+
+</body>
+</html>
