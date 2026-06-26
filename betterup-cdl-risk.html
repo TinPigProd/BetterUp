@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risk Methodology · Center for Daring Leadership</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #111210;
+    --white: #ffffff;
+    --surface: #f7f5f2;
+    --muted: #888880;
+    --border: #e4e1da;
+    --pink: #e8006e;
+    --pink-light: #fdf0f6;
+    --amber: #b5750a;
+    --amber-light: #fdf4e3;
+    --red: #b3261e;
+    --red-light: #fdecea;
+    --green: #2e6b4a;
+    --green-light: #eaf3ee;
+    --blue: #1a3a5c;
+    --blue-light: #eef3f8;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    background: var(--ink);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .nav-back {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nav-back:hover { color: var(--white); }
+
+  .nav-title { font-size: 13px; color: rgba(255,255,255,0.5); }
+  .nav-title strong { color: var(--white); font-weight: 500; }
+
+  .page-header {
+    background: var(--ink);
+    padding: 3rem 2.5rem 0;
+    border-bottom: 3px solid var(--pink);
+  }
+
+  .page-header-inner { max-width: 1200px; margin: 0 auto; padding-bottom: 2rem; }
+
+  .page-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 1rem;
+  }
+
+  .page-header h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header h1 em { font-style: italic; color: var(--pink); }
+
+  .page-header p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+    max-width: 620px;
+  }
+
+  /* TABS */
+  .tab-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+  }
+
+  .tab-btn {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.45);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 12px 20px 14px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: color 0.15s, border-color 0.15s;
+    margin-bottom: -3px;
+  }
+
+  .tab-btn:hover { color: rgba(255,255,255,0.8); }
+
+  .tab-btn.active {
+    color: var(--white);
+    border-bottom-color: var(--pink);
+  }
+
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 2.5rem 5rem;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .approach-block {
+    display: grid;
+    grid-template-columns: 3px 1fr;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .approach-stripe { background: var(--pink); }
+
+  .approach-body { padding: 1.5rem 1.75rem; background: var(--surface); }
+
+  .approach-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 10px;
+  }
+
+  .approach-body h2 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+
+  .approach-body h2 em { font-style: italic; color: var(--pink); }
+
+  .approach-body p {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+    max-width: 820px;
+    margin-bottom: 0.6rem;
+  }
+
+  .approach-body p:last-child { margin-bottom: 0; }
+
+  /* RAID TABLE - CLICKABLE LOG STYLE */
+  .raid-table-wrap {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .raid-table-header {
+    display: grid;
+    grid-template-columns: 90px 1fr 90px 140px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .raid-th {
+    padding: 10px 14px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .raid-row {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .raid-row:last-child { border-bottom: none; }
+
+  .raid-row-main {
+    display: grid;
+    grid-template-columns: 90px 1fr 90px 140px;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .raid-row-main:hover { background: var(--surface); }
+
+  .raid-row-main.open { background: var(--surface); }
+
+  .raid-type-tag {
+    margin: 10px 14px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+    width: fit-content;
+  }
+
+  .type-risk { background: var(--red-light); color: var(--red); }
+  .type-assumption { background: var(--amber-light); color: var(--amber); }
+  .type-issue { background: var(--ink); color: var(--white); }
+  .type-dependency { background: var(--blue-light); color: var(--blue); }
+
+  .raid-row-title {
+    padding: 12px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .raid-chevron {
+    font-size: 9px;
+    color: var(--muted);
+    transition: transform 0.2s;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .raid-row-main.open .raid-chevron { transform: rotate(180deg); color: var(--ink); }
+
+  .raid-severity {
+    padding: 12px 14px;
+  }
+
+  .severity-dot {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot-high { background: var(--red); }
+  .dot-medium { background: var(--amber); }
+  .dot-low { background: var(--green); }
+
+  .raid-owner {
+    padding: 12px 14px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .raid-detail {
+    display: none;
+    padding: 16px 18px 18px 90px;
+    border-top: 1px solid var(--border);
+  }
+
+  .raid-detail.open { display: block; }
+
+  .raid-detail.sev-high { background: var(--red-light); border-top-color: var(--red); }
+  .raid-detail.sev-medium { background: var(--amber-light); border-top-color: var(--amber); }
+  .raid-detail.sev-low { background: var(--green-light); border-top-color: var(--green); }
+
+  .raid-detail p {
+    font-size: 12.5px;
+    color: #444;
+    line-height: 1.65;
+    max-width: 760px;
+    margin-bottom: 8px;
+  }
+
+  .raid-detail p:last-child { margin-bottom: 0; }
+
+  .raid-detail .detail-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .raid-detail.sev-high .detail-label { color: var(--red); }
+  .raid-detail.sev-medium .detail-label { color: var(--amber); }
+  .raid-detail.sev-low .detail-label { color: var(--green); }
+
+  /* TRIAGE for tab 2 */
+  .triage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 2rem;
+  }
+
+  .triage-card { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+
+  .triage-header {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .triage-header.urgent { background: var(--red-light); }
+  .triage-header.scheduled { background: var(--amber-light); }
+  .triage-header.monitor { background: var(--green-light); }
+
+  .triage-title { font-family: 'DM Serif Display', Georgia, serif; font-size: 15px; font-weight: 400; }
+  .triage-header.urgent .triage-title { color: var(--red); }
+  .triage-header.scheduled .triage-title { color: var(--amber); }
+  .triage-header.monitor .triage-title { color: var(--green); }
+
+  .triage-time { font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; }
+
+  .triage-body { padding: 14px 16px; background: var(--white); }
+  .triage-body p { font-size: 12px; color: #555; line-height: 1.65; margin-bottom: 10px; }
+  .triage-body ul { padding-left: 16px; margin: 0; }
+  .triage-body ul li { font-size: 11px; color: var(--muted); line-height: 1.5; margin-bottom: 4px; }
+
+  .cadence-note {
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border-radius: 3px;
+    border-left: 3px solid var(--pink);
+  }
+
+  .cadence-note p { font-size: 12px; color: #555; line-height: 1.6; }
+  .cadence-note a { color: var(--pink); text-decoration: none; font-weight: 500; }
+
+  .honest-note {
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border-radius: 3px;
+    border-left: 3px solid var(--muted);
+  }
+
+  .honest-note p {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  footer {
+    background: var(--ink);
+    padding: 1.25rem 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  footer p { font-size: 11px; color: rgba(255,255,255,0.25); text-align: center; }
+
+  @media (max-width: 800px) {
+    .raid-table-header, .raid-row-main { grid-template-columns: 70px 1fr 70px; }
+    .raid-owner { display: none; }
+    .raid-detail { padding-left: 18px; }
+    .triage-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1.25rem; }
+    .page-header { padding: 2rem 1.25rem 0; }
+    .content { padding: 2rem 1.25rem 4rem; }
+    .tab-nav { padding: 0 1.25rem; overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="./" class="nav-back">← Back</a>
+  <div class="nav-title"><strong>Risk Methodology</strong> · Center for Daring Leadership</div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Risk and operational management</div>
+    <h1>Holding many moving parts <em>without losing the thread.</em></h1>
+    <p>A RAID log, Risks, Assumptions, Issues, Dependencies, grounded in a real implementation, and then carried forward into how I'd apply the same discipline to this role.</p>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showTab('tab-past', this)">Past experience: SAP implementation</button>
+    <button class="tab-btn" onclick="showTab('tab-forward', this)">Carrying it forward: Center for Daring Leadership</button>
+  </div>
+</div>
+
+<!-- TAB 1: PAST EXPERIENCE -->
+<div class="content">
+<div class="tab-panel active" id="tab-past">
+
+  <div class="approach-block">
+    <div class="approach-stripe"></div>
+    <div class="approach-body">
+      <div class="approach-eyebrow">Context</div>
+      <h2>An enterprise SAP implementation, <em>inventory systems.</em></h2>
+      <p>At Pure Storage, SAP was brought in to manage inventory systems. Throughout the implementation, it was not clear what training was actually needed. The vendor's instinct was to train against technical documentation. I advocated for training built around the people impacted by the change, what they would need to do differently, not just what the system could technically do.</p>
+      <p>The RAID log below reflects how that ambiguity actually played out, not a tidy retrospective version of it.</p>
+    </div>
+  </div>
+
+  <div class="raid-table-wrap">
+    <div class="raid-table-header">
+      <div class="raid-th">Type</div>
+      <div class="raid-th">Item</div>
+      <div class="raid-th">Severity</div>
+      <div class="raid-th">Owner</div>
+    </div>
+
+    <div class="raid-row">
+      <div class="raid-row-main" onclick="toggleRaid(this)">
+        <div class="raid-type-tag type-issue">Issue</div>
+        <div class="raid-row-title">Training scope contested between vendor and user need<span class="raid-chevron">▼</span></div>
+        <div class="raid-severity"><span class="severity-dot"><span class="dot dot-high"></span>High</span></div>
+        <div class="raid-owner">Learning &amp; Enablement</div>
+      </div>
+      <div class="raid-detail">
+        <div class="detail-label">What happened</div>
+        <p>The vendor's default approach was to point to technical system documentation as the basis for training. That documentation explained how SAP functioned, not what behavior change was required of the people who would use it differently once it went live. I had to advocate directly for reframing the question: not "what does the system do," but "what does this person need to do differently tomorrow."</p>
+        <div class="detail-label">What it took</div>
+        <p>Curiosity, collaboration, and context. It required sitting with the technical services team specifically to understand how SAP inventory data actually needed to flow into their existing ServiceNow workflow, so that when a customer needed a replacement part, the rep could see real-time inventory instead of a manually updated spreadsheet that was perpetually out of date.</p>
+      </div>
+    </div>
+
+    <div class="raid-row">
+      <div class="raid-row-main" onclick="toggleRaid(this)">
+        <div class="raid-type-tag type-assumption">Assumption</div>
+        <div class="raid-row-title">Multiple administrative layers assumed to need formal training<span class="raid-chevron">▼</span></div>
+        <div class="raid-severity"><span class="severity-dot"><span class="dot dot-medium"></span>Medium</span></div>
+        <div class="raid-owner">Learning &amp; Enablement</div>
+      </div>
+      <div class="raid-detail">
+        <div class="detail-label">What happened</div>
+        <p>Several layers of administrative staff were originally flagged as needing formal training on the new system. Once I spent time in their actual weekly working meetings, it became clear they were already getting the information they needed through that existing rhythm. The assumption that more formal training equals more readiness turned out to be false for this group specifically.</p>
+        <div class="detail-label">Why this matters</div>
+        <p>Knowing when not to build something is its own discipline. Resources that would have gone into unnecessary formal training were redirected to where the real gap actually was.</p>
+      </div>
+    </div>
+
+    <div class="raid-row">
+      <div class="raid-row-main" onclick="toggleRaid(this)">
+        <div class="raid-type-tag type-dependency">Dependency</div>
+        <div class="raid-row-title">Downstream impact to Professional Services and Customer Success surfaced late<span class="raid-chevron">▼</span></div>
+        <div class="raid-severity"><span class="severity-dot"><span class="dot dot-high"></span>High</span></div>
+        <div class="raid-owner">Cross-functional</div>
+      </div>
+      <div class="raid-detail">
+        <div class="detail-label">What happened</div>
+        <p>While building training specifically for the technical services group, it became clear, late in that process, that Professional Services and Customer Success had their own implications from the same system change that hadn't been scoped or surfaced earlier. The work for one group revealed a dependency that should have been mapped from the start.</p>
+        <div class="detail-label">The lesson</div>
+        <p>Solving deeply for the team directly in front of you can obscure who else touches the same workflow. Mapping cross-functional impact needs to happen before deep design work begins, not be discovered as a byproduct of it.</p>
+      </div>
+    </div>
+
+    <div class="raid-row">
+      <div class="raid-row-main" onclick="toggleRaid(this)">
+        <div class="raid-type-tag type-risk">Risk</div>
+        <div class="raid-row-title">Training deliverables not ready against an aggressive timeline<span class="raid-chevron">▼</span></div>
+        <div class="raid-severity"><span class="severity-dot"><span class="dot dot-high"></span>High</span></div>
+        <div class="raid-owner">Learning &amp; Enablement</div>
+      </div>
+      <div class="raid-detail">
+        <div class="detail-label">What happened</div>
+        <p>As the scope ambiguity and cross-functional gaps became clear, I flagged directly that training deliverables were not ready to support the planned go-live timeline. This was not a popular thing to raise on a program already under schedule pressure.</p>
+        <div class="detail-label">What it cost, honestly</div>
+        <p>The program rolled twice based on these risks, from an original twelve month timeline to eighteen months, and ultimately past twenty four months. Across that extended window, personnel turnover happened. People moved in and out of the project, which is its own compounding risk, institutional knowledge becomes harder to hold onto the longer a program stretches. I'm not going to pretend the extended timeline was costless. It wasn't. But shipping training that didn't match real behavioral need would have cost more, quietly, after go-live, rather than visibly, before it.</p>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+<!-- TAB 2: CARRYING FORWARD -->
+<div class="tab-panel" id="tab-forward">
+
+  <div class="approach-block">
+    <div class="approach-stripe"></div>
+    <div class="approach-body">
+      <div class="approach-eyebrow">Application</div>
+      <h2>Carrying the same discipline into a <em>client-facing role.</em></h2>
+      <p>The Pure Storage engagement was internal, the tension was between vendor documentation and user need. In a client-facing role like Client Delivery Director, the same discipline has to extend outward into the relationship itself, where the risk isn't just scope ambiguity, it's a client trying to go off script with the methodology, or decisions fragmenting across multiple stakeholders who were never aligned with each other in the first place.</p>
+      <p>The job description names this directly: spotting moments where design drift, over-customization, or fragmented decisions could weaken impact, and intervening early to preserve coherence. The RAID items below are how I'd apply the same instinct I used at Pure Storage, advocating for real need over surface-level requests, to that specific risk.</p>
+    </div>
+  </div>
+
+  <div class="raid-table-wrap">
+    <div class="raid-table-header">
+      <div class="raid-th">Type</div>
+      <div class="raid-th">Item</div>
+      <div class="raid-th">Severity</div>
+      <div class="raid-th">Owner</div>
+    </div>
+
+    <div class="raid-row">
+      <div class="raid-row-main" onclick="toggleRaid(this)">
+        <div class="raid-type-tag type-risk">Risk</div>
+        <div class="raid-row-title">Client requests to skip or soften a module, going off script<span class="raid-chevron">▼</span></div>
+        <div class="raid-severity"><span class="severity-dot"><span class="dot dot-high"></span>High</span></div>
+        <div class="raid-owner">Client Delivery Director</div>
+      </div>
+      <div class="raid-detail">
+        <div class="detail-label">What it looks like</div>
+        <p>An operating lead asks to skip the Rumbling with Vulnerability module because it feels too uncomfortable for their culture, or a facilitator quietly softens the language session to session without anyone explicitly deciding that was acceptable. Each individual request sounds reasonable. The risk is what accumulates.</p>
+        <div class="detail-label">How the Pure Storage lesson applies</div>
+        <p>The instinct that served me well there, asking what the person actually needs rather than accepting the surface request, applies directly here. The response isn't a flat no. It's understanding what the client is actually trying to solve, then being honest about what can flex and what cannot.</p>
+      </div>
+    </div>
+
+    <div class="raid-row">
+      <div class="raid-row-main" onclick="toggleRaid(this)">
+        <div class="raid-type-tag type-issue">Issue</div>
+        <div class="raid-row-title">Fragmented decisions across client stakeholders who were never aligned<span class="raid-chevron">▼</span></div>
+        <div class="raid-severity"><span class="severity-dot"><span class="dot dot-high"></span>High</span></div>
+        <div class="raid-owner">Client Delivery Director</div>
+      </div>
+      <div class="raid-detail">
+        <div class="detail-label">What it looks like</div>
+        <p>Multiple stakeholders on the client side each make small, well-intentioned adjustments independently, an HR lead changes session cadence, an executive sponsor changes which leaders are included, none of which looks like drift in isolation, but which compound into something that no longer resembles what was designed and sold.</p>
+        <div class="detail-label">How the Pure Storage lesson applies</div>
+        <p>The Professional Services and Customer Success surprise at Pure Storage came from solving deeply for one group without mapping who else touched the workflow. The same mapping discipline applies to client stakeholders, understanding the full set of people who can influence the program before drift has a chance to compound silently.</p>
+      </div>
+    </div>
+
+    <div class="raid-row">
+      <div class="raid-row-main" onclick="toggleRaid(this)">
+        <div class="raid-type-tag type-assumption">Assumption</div>
+        <div class="raid-row-title">Executive sponsor will stay engaged through Elevate<span class="raid-chevron">▼</span></div>
+        <div class="raid-severity"><span class="severity-dot"><span class="dot dot-medium"></span>Medium</span></div>
+        <div class="raid-owner">Vice President</div>
+      </div>
+      <div class="raid-detail">
+        <div class="detail-label">What it looks like</div>
+        <p>The sponsor who championed the program at signature may not be the same person present at the executive business review months later, through promotion, reassignment, or departure. Assuming continuity without verifying it is exactly the kind of assumption that needs active tracking, not passive hope.</p>
+        <div class="detail-label">How the Pure Storage lesson applies</div>
+        <p>Personnel turnover during the Pure Storage engagement compounded an already difficult timeline. The lesson wasn't that turnover is avoidable, it isn't, it was that tracking it actively rather than being surprised by it changes how much damage it does.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="triage-grid">
+    <div class="triage-card">
+      <div class="triage-header urgent">
+        <div class="triage-title">Urgent</div>
+        <div class="triage-time" style="color: var(--red);">Same day</div>
+      </div>
+      <div class="triage-body">
+        <p>Anything where delay compounds the damage, or the client relationship is at immediate risk.</p>
+        <ul>
+          <li>Active methodology compromise in a live session</li>
+          <li>Executive sponsor disengagement signal</li>
+          <li>Multiple stakeholders making conflicting decisions in real time</li>
+        </ul>
+      </div>
+    </div>
+    <div class="triage-card">
+      <div class="triage-header scheduled">
+        <div class="triage-title">Scheduled</div>
+        <div class="triage-time" style="color: var(--amber);">Next bi-weekly review</div>
+      </div>
+      <div class="triage-body">
+        <p>Real but not time-critical. Reviewed as a pattern, not reacted to individually.</p>
+        <ul>
+          <li>A single customization request without urgency attached</li>
+          <li>Early signal of stakeholder misalignment, not yet acute</li>
+        </ul>
+      </div>
+    </div>
+    <div class="triage-card">
+      <div class="triage-header monitor">
+        <div class="triage-title">Monitor</div>
+        <div class="triage-time" style="color: var(--green);">Logged, reviewed passively</div>
+      </div>
+      <div class="triage-body">
+        <p>Acknowledged and tracked, but doesn't require active intervention unless it changes.</p>
+        <ul>
+          <li>Low-probability assumptions with low impact if wrong</li>
+          <li>Dependencies with long lead time before they matter</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+</div>
+
+<footer>
+  <p>TinPigProductions · Center for Daring Leadership · Risk Methodology</p>
+</footer>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleRaid(row) {
+  const detail = row.nextElementSibling;
+  const isOpen = row.classList.contains('open');
+
+  // Determine severity from the dot inside this row
+  const dot = row.querySelector('.dot');
+  let sevClass = 'sev-medium';
+  if (dot.classList.contains('dot-high')) sevClass = 'sev-high';
+  else if (dot.classList.contains('dot-medium')) sevClass = 'sev-medium';
+  else if (dot.classList.contains('dot-low')) sevClass = 'sev-low';
+
+  detail.classList.remove('sev-high', 'sev-medium', 'sev-low');
+  detail.classList.add(sevClass);
+
+  row.classList.toggle('open', !isOpen);
+  detail.classList.toggle('open', !isOpen);
+}
+</script>
+
+</body>
+</html>
