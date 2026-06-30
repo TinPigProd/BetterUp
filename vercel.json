@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://cp-portfolio-alpha.vercel.app/$1",
+      "permanent": false
+    }
+  ]
+}
